@@ -4,6 +4,7 @@
 */
 
 // TARGET: define the button's target region
+let gridPosition = [];
 let bx, by, bw = 100, bh = 100;
 
 let clickCount = 0;
@@ -24,13 +25,28 @@ function draw() {
     mouseY > by && mouseY < by + bh;
  
   // SIGNIFIER: appearance change to indicate response
+
+  for (let i = 0; i < Math.floor(width/bw); i++) {
+    for (let j = 0; j < Math.floor(height/bh); j++) {
+
+      let x = i * bw;
+      let y = j * bh;
+      gridPosition.push ({positionX: x, positionY: y});
+
+      fill(20, 19, 22);
+      ellipse(x, y, 100);
+
+    }
+    
+  }
+
   noStroke();
   if (hovering) {
     fill('#e0245e');
   } else {
     fill(20, 19, 22);
   }
-  ellipse(bx, by, bw, bh, 10);
+  ellipse(bx, by, bw, bh);
 
   fill(255);
   textAlign(CENTER, CENTER);
@@ -38,6 +54,8 @@ function draw() {
   text('clicks: ' + clickCount, bx + bw / 2, by + bh / 2 + 14);
 
   cursor(hovering ? HAND : ARROW);
+
+  
 }
  
 // EVENT -> RESPONSE: only counts if the click lands inside the target
@@ -47,8 +65,9 @@ function mousePressed() {
     mouseY > by && mouseY < by + bh;
  
   if (hit) {
-    bx = random(0, width - bw);
-    by = random(0, height - bh);
+    let picked = random(gridPosition);
+    bx = picked.positionX;
+    by = picked.positionY;
     clickCount++;
   }
 }
