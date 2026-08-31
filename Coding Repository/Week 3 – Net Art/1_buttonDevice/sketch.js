@@ -17,7 +17,7 @@ function setup() {
 }
  
 function draw() {
-  background("#000000");
+  background("#F2F3F4");
  
   // VALIDATE TARGET: is the mouse over the target right now?
   let hovering =
@@ -33,7 +33,7 @@ function draw() {
       let y = j * bh;
       gridPosition.push ({positionX: x, positionY: y});
 
-      fill(20, 19, 22);
+      fill("#DADEDF");
       ellipse(x, y, 100);
 
     }
@@ -44,7 +44,7 @@ function draw() {
   if (hovering) {
     fill('#e0245e');
   } else {
-    fill(20, 19, 22);
+    fill("#DADEDF");
   }
   ellipse(bx, by, bw, bh);
 
