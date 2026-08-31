@@ -4,18 +4,19 @@
 */
 
 // TARGET: define the button's target region
-let bx, by, bw = 160, bh = 56;
+let bx, by, bw = 100, bh = 100;
 
 let clickCount = 0;
  
 function setup() {
-  createCanvas(320, 130);
+  createCanvas(windowWidth, windowHeight);
   bx = width / 2 - bw / 2; // center the button horizontally
-  by = 30;
+  by = 60;
+  ellipseMode(CORNER);
 }
  
 function draw() {
-  background(244);
+  background("#000000");
  
   // VALIDATE TARGET: is the mouse over the target right now?
   let hovering =
@@ -29,11 +30,11 @@ function draw() {
   } else {
     fill(20, 19, 22);
   }
-  rect(bx, by, bw, bh, 10);
+  ellipse(bx, by, bw, bh, 10);
 
   fill(255);
   textAlign(CENTER, CENTER);
-  text('PRESS ME', bx + bw / 2, by + bh / 2 - 6);
+  text('FIND ME', bx + bw / 2, by + bh / 2 - 6);
   text('clicks: ' + clickCount, bx + bw / 2, by + bh / 2 + 14);
 
   cursor(hovering ? HAND : ARROW);
@@ -46,6 +47,8 @@ function mousePressed() {
     mouseY > by && mouseY < by + bh;
  
   if (hit) {
+    bx = random(0, width - bw);
+    by = random(0, height - bh);
     clickCount++;
   }
 }
