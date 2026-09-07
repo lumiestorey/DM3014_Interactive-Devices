@@ -8,7 +8,9 @@ let gravity = 0.6;
 let ground = 350;
 let speed = 30;
 
-let platform = { x: 300, y: 300, w: 140, h: 16 };
+let platform1 = { x: 100, y: 300, w: 50, h: 16 };
+let platform2 = { x: 200, y: 200, w: 100, h: 16};
+let platform3 = { x: 400, y: 300, w: 140, h: 16 };
 
 function setup() {
   createCanvas(600, 400);
@@ -43,22 +45,38 @@ function draw() {
   player.x = constrain(player.x, 0, width - player.w);
 
   // platform 
-  let landingOnPlatform = 
-    player.x + player.w > platform.x &&
-    player.x < platform.x + platform.w &&
-    player.y + player.h > platform.y &&
-    player.y < platform.y + platform.h + 10 &&
+  let landingOnPlatform1 = 
+    player.x + player.w > platform1.x &&
+    player.x < platform1.x + platform1.w &&
+    player.y + player.h > platform1.y &&
+    player.y < platform1.y + platform1.h + 10 &&
     player.vy >= 0;
 
-  if (landingOnPlatform) {
-    player.y = platform.y - player.h;
+  let landingOnPlatform2 = 
+    player.x + player.w > platform2.x &&
+    player.x < platform2.x + platform2.w &&
+    player.y + player.h > platform2.y &&
+    player.y < platform2.y + platform2.h + 10 &&
+    player.vy >= 0;
+
+  let landingOnPlatform3 = 
+    player.x + player.w > platform3.x &&
+    player.x < platform3.x + platform3.w &&
+    player.y + player.h > platform3.y &&
+    player.y < platform3.y + platform3.h + 10 &&
+    player.vy >= 0;
+
+  if (landingOnPlatform1 || landingOnPlatform2 || landingOnPlatform3) {
+    player.y = platform1.y - player.h;
     player.vy = 0;
     player.onGround = true;
   }
 
   // draw platform 
   fill(90);
-  rect(platform.x, platform.y, platform.w, platform.h);
+  rect(platform1.x, platform1.y, platform1.w, platform1.h);
+  rect(platform2.x, platform2.y, platform2.w, platform2.h);
+  rect(platform3.x, platform3.y, platform3.w, platform3.h);
 
 }
 
