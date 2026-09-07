@@ -7,7 +7,7 @@ let speed = 4;
 let platforms = [ 
   { x: 100, y: 300, w: 50, h: 16, vx: 1.5, minX: 60, maxX: 220 }, 
   { x: 200, y: 200, w: 100, h: 16, vx: -1, minX: 150, maxX: 350 },
-  { x: 400, y: 250, w: 140, h: 16, vx: 1.2, minX: 300, maxX: 460 }
+  { x: 400, y: 250, w: 140, h: 16, vx: 0.8, minX: 300, maxX: 600 }
 ];
 let connected = false;
 
