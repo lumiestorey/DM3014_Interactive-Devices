@@ -12,15 +12,22 @@ let platform1 = { x: 100, y: 300, w: 50, h: 16 };
 let platform2 = { x: 200, y: 200, w: 100, h: 16};
 let platform3 = { x: 400, y: 300, w: 140, h: 16 };
 
-let deepColor = {"#0d3473"};
-let highColor = {"#5ed1db"};
+let deepColor = "#0d3473";
+let highColor = "#a4f5fc";
 
 function setup() {
   createCanvas(600, 400);
 }
 
 function draw() {
-  background(20);
+  // background colour
+  let t = constrain(map(player.y, 0, ground, 0, 1), 0, 1);
+  let bg = lerpColor(
+  color(deepColor),
+  color(highColor),
+  t
+  );
+  background(bg);
 
   // gravity
   player.vy += gravity;
@@ -37,6 +44,7 @@ function draw() {
   }
 
   // draw environment
+  noStroke();
   fill(60);
   rect(0, ground, width, height - ground); // the "floor" is just a rule + a rectangle
 
