@@ -3,7 +3,7 @@
  * Platformer Exercise
 */
 
-let player = { x: 50, y: 0, vy: 0, w: 30, h: 30 };
+let player = { x: 50, y: 0, vy: 0, w: 30, h: 30, onGround: false };
 let gravity = 0.6;
 let ground = 350;
 let speed = 30;
@@ -21,10 +21,14 @@ function draw() {
   player.vy += gravity;
   player.y += player.vy;
 
+  // assume airborne
+  player.onGround = false;
+
   // ground collision
   if (player.y + player.h > ground) {
     player.y = ground - player.h;
     player.vy = 0;
+    player.onGround = true;
   }
 
   // draw environment
@@ -49,6 +53,7 @@ function draw() {
   if (landingOnPlatform) {
     player.y = platform.y - player.h;
     player.vy = 0;
+    player.onGround = true;
   }
 
   // draw platform 
@@ -58,9 +63,12 @@ function draw() {
 }
 
 function keyPressed() {
-  if (key === ' ' && player.y + player.h >= ground) {
+  if (key === ' ' && player.onGround) {
     player.vy = -12; // jump
   }
+  // if (key === ' ' && player.y + player.h >= platform.y + platform.h) {
+  //   player.vy = -12; // jump
+  // }
   if (keyIsDown(LEFT_ARROW)) {
     player.x -= speed;
   }
