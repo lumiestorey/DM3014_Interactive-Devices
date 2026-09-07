@@ -5,9 +5,9 @@ let gravity = 0.6;
 let ground = 350;
 let speed = 4;
 let platforms = [ 
-  { x: 100, y: 300, w: 50, h: 16 }, 
-  { x: 200, y: 200, w: 100, h: 16},
-  { x: 400, y: 300, w: 140, h: 16 }
+  { x: 100, y: 300, w: 50, h: 16, vx: 1.5, minX: 60, maxX: 220 }, 
+  { x: 200, y: 200, w: 100, h: 16, vx: -1, minX: 150, maxX: 350 },
+  { x: 400, y: 250, w: 140, h: 16, vx: 1.2, minX: 300, maxX: 460 }
 ];
 let connected = false;
 
@@ -36,6 +36,15 @@ function draw() {
   let bg = lerpColor(color(deepColor), color(highColor),t);
   background(bg);
 
+  for (let i = 0; i < platforms.length; i++) {
+    let p = platforms[i];
+    p.x += p.vx;
+    if (p.x < p.minX || p.x + p.w > p.maxX) {
+      p.vx *= -1;
+      p.x = constrain(p.x, p.minX, p.maxX - p.w);
+    }
+  }
+
   player.x += input.dx * speed;
   player.x = constrain(player.x, 0, width - player.w);
 
@@ -51,6 +60,7 @@ function draw() {
   }
 
   for (let i = platforms.length - 1; i >= 0; i--) {
+    let plat = platforms[i];
     let landingOnPlatform = 
     player.x + player.w > platforms[i].x &&
     player.x < platforms[i].x + platforms[i].w &&
@@ -62,6 +72,7 @@ function draw() {
     player.y = platforms[i].y - player.h;
     player.vy = 0;
     player.onGround = true;
+    player.x += plat.vx;
     }
   }
 
@@ -76,6 +87,7 @@ function draw() {
   //   player.y = platform.y - player.h;
   //   player.vy = 0;
   // }
+
   noStroke();
   fill(60);
   rect(0, ground, width, height - ground);
