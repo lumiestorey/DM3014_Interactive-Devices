@@ -32,6 +32,9 @@ function draw() {
   // draw player
   fill(240, 90, 60);
   rect(player.x, player.y, player.w, player.h);
+
+  //constrain within environment 
+  player.x = constrain(player.x, 0, width - player.w);
 }
 
 function keyPressed() {
