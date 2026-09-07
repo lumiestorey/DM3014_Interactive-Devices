@@ -8,6 +8,8 @@ let gravity = 0.6;
 let ground = 350;
 let speed = 30;
 
+let platform = { x: 300, y: 300, w: 140, h: 16 };
+
 function setup() {
   createCanvas(600, 400);
 }
@@ -35,6 +37,24 @@ function draw() {
 
   //constrain within environment 
   player.x = constrain(player.x, 0, width - player.w);
+
+  // platform 
+  let landingOnPlatform = 
+    player.x + player.w > platform.x &&
+    player.x < platform.x + platform.w &&
+    player.y + player.h > platform.y &&
+    player.y < platform.y + platform.h + 10 &&
+    player.vy >= 0;
+
+  if (landingOnPlatform) {
+    player.y = platform.y - player.h;
+    player.vy = 0;
+  }
+
+  // draw platform 
+  fill(90);
+  rect(platform.x, platform.y, platform.w, platform.h);
+
 }
 
 function keyPressed() {
