@@ -66,8 +66,16 @@ function draw() {
     player.y < platform3.y + platform3.h + 10 &&
     player.vy >= 0;
 
-  if (landingOnPlatform1 || landingOnPlatform2 || landingOnPlatform3) {
+  if (landingOnPlatform1) {
     player.y = platform1.y - player.h;
+    player.vy = 0;
+    player.onGround = true;
+  } else if (landingOnPlatform2) {
+    player.y = platform2.y - player.h;
+    player.vy = 0;
+    player.onGround = true;
+  } else if (landingOnPlatform3) {
+    player.y = platform3.y - player.h;
     player.vy = 0;
     player.onGround = true;
   }
