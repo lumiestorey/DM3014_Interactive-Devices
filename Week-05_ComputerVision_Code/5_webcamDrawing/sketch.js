@@ -101,7 +101,7 @@ function mousePressed() {
 
 var Grid = function (_w, _h) {
   this.diffImg = 0;
-  this.noteWidth = 10; // *** change spacing between each point
+  this.noteWidth = 2; // *** change spacing between each point
   this.worldWidth = _w;
   this.worldHeight = _h;
   this.numOfNotesX = int(this.worldWidth / this.noteWidth);
@@ -109,15 +109,17 @@ var Grid = function (_w, _h) {
   this.arrayLength = this.numOfNotesX * this.numOfNotesY;
   this.noteStates = [];
   this.noteStates = new Array(this.arrayLength).fill(0);
-  this.colorArray = [];
+  //this.colorArray = [];
+  this.colorA = color(245, 56, 255, 150); 
+  this.colorB = color(180, 80, 90, 150);
   console.log(this);
   console.log(_w, _h);
 
-  for (var i = 0; i < this.arrayLength; i++) {
-    this.colorArray.push(
-      color(218, 165, 32, 150) // *** set colours of the points
-    );
-  }
+  // for (var i = 0; i < this.arrayLength; i++) {
+  //   this.colorArray.push(
+  //     color(260, 15, 50, 150) // *** set colours of the points
+  //   );
+  // }
 
   this.update = function (_img) {
     this.diffImg = _img;
@@ -157,7 +159,9 @@ var Grid = function (_w, _h) {
         var noteIndex = x + y * this.numOfNotesX;
 
         if (this.noteStates[noteIndex] > 0) {
-          fill(this.colorArray[noteIndex]);
+          var c = lerpColor(this.colorB, this.colorA, this.noteStates[noteIndex]);
+          fill(c);
+          //fill(this.colorArray[noteIndex]);
           ellipse(posX, posY, camera.width / 20, camera.height / 20); // *** change shape of point
         }
       }
