@@ -13,7 +13,7 @@ var grid;
 let img;
 
 function preload() {
-  img = loadImage('/6_images/cinnamorrol.png');
+  img = loadImage('/5_webcamDrawing/cinnamorrol.png');
 }
 
 function setup() {
