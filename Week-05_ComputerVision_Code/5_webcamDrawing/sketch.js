@@ -8,9 +8,13 @@ var prevImg;
 var currImg;
 var diffImg;
 var spotImg;
-var threshold = 0.1; // *** change sensitivity (decimal between 0 - 1)
+var threshold = 0.2; // *** change sensitivity (decimal between 0 - 1)
 var grid;
 let img;
+
+function preload() {
+  img = loadImage('/6_images/cinnamorrol.png');
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -110,16 +114,10 @@ var Grid = function (_w, _h) {
   this.noteStates = [];
   this.noteStates = new Array(this.arrayLength).fill(0);
   //this.colorArray = [];
-  this.colorA = color(245, 56, 255, 150); 
-  this.colorB = color(180, 80, 90, 150);
+  this.colorA = color(14, 38, 235, 150); //define color for lerp
+  this.colorB = color(56, 255, 245, 150);
   console.log(this);
   console.log(_w, _h);
-
-  // for (var i = 0; i < this.arrayLength; i++) {
-  //   this.colorArray.push(
-  //     color(260, 15, 50, 150) // *** set colours of the points
-  //   );
-  // }
 
   this.update = function (_img) {
     this.diffImg = _img;
@@ -160,12 +158,17 @@ var Grid = function (_w, _h) {
 
         if (this.noteStates[noteIndex] > 0) {
           var c = lerpColor(this.colorB, this.colorA, this.noteStates[noteIndex]);
-          fill(c);
+          // fill(c);
           //fill(this.colorArray[noteIndex]);
-          ellipse(posX, posY, camera.width / 20, camera.height / 20); // *** change shape of point
+          // ellipse(posX, posY, camera.width / 20, camera.height / 20); // *** change shape of point
+          var imgW = camera.width / 20; 
+          var imgH = camera.height / 20;
+          tint(red(c), green(c), blue(c), alpha(c) * this.noteStates[noteIndex]); //cinnamorrol follow lerp color
+          image(img, posX - imgW, posY - imgH, imgW, imgH);
         }
       }
     }
+    noTint();
     pop();
   };
 };
