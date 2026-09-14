@@ -8,7 +8,7 @@ var prevImg;
 var currImg;
 var diffImg;
 var spotImg;
-var threshold = 0.2; // *** change sensitivity (decimal between 0 - 1)
+var threshold = 0.1; // *** change sensitivity (decimal between 0 - 1)
 var grid;
 let img;
 
