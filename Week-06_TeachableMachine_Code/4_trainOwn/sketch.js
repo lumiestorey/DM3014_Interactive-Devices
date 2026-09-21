@@ -14,7 +14,7 @@ let quack;
 
 function preload() {
   classifier = ml5.imageClassifier(imageModelURL + "model.json");
-  //quack = loadSound("audio/SFX-quack.mp3");
+  quack = loadSound("audio/SFX-quack.mp3");
 }
 
 function setup() {
@@ -58,7 +58,9 @@ function gotResult(error, results) {
   label = results[0].label; // results in array ordered by confidence
 
   if (label === "duck") {
+   if (!quack.isPlaying()) {
     quack.play();
+  } 
   } else {
     quack.stop();
   }
