@@ -14,7 +14,7 @@ let quack;
 
 function preload() {
   classifier = ml5.imageClassifier(imageModelURL + "model.json");
-  quack = loadSound("audio/SFX-quack.mp3");
+  quack = loadSound("audio/SFX-quack.mov");
 }
 
 function setup() {
