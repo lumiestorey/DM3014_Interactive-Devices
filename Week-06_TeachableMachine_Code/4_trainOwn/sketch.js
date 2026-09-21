@@ -5,7 +5,7 @@
 
 let classifier;
 // model url *** edit link here
-const imageModelURL = "https://teachablemachine.withgoogle.com/models/L7hqJdJ8p/";
+const imageModelURL = "https://teachablemachine.withgoogle.com/models/1x-QTBLnF/";
 
 let video;
 let flippedVideo;
