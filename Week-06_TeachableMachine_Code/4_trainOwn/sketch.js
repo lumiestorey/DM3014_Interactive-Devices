@@ -10,9 +10,11 @@ const imageModelURL = "https://teachablemachine.withgoogle.com/models/L7hqJdJ8p/
 let video;
 let flippedVideo;
 let label = ""; // to store classifications
+let quack;
 
 function preload() {
   classifier = ml5.imageClassifier(imageModelURL + "model.json");
+  //quack = loadSound("audio/SFX-quack.mp3");
 }
 
 function setup() {
@@ -37,6 +39,10 @@ function draw() {
   text(label, width / 2, height - 4);
 }
 
+function mousePressed() {
+userStartAudio();
+}
+
 // get prediction for the current video frame
 function classifyVideo() {
   flippedVideo = ml5.flipImage(video);
@@ -50,6 +56,12 @@ function gotResult(error, results) {
   }
 
   label = results[0].label; // results in array ordered by confidence
+
+  if (label === "duck") {
+    quack.play();
+  } else {
+    quack.stop();
+  }
 
   classifyVideo(); // classify again
 }
